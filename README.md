@@ -3,7 +3,7 @@
 
 ## Setup and Installation
 
-This programmng assignment should be templated and cloned locally on your computer. 
+This programming assignment should be templated and cloned locally on your computer. 
 
 ## Introduction
 
