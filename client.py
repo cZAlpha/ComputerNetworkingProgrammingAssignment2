@@ -4,7 +4,7 @@ import sys
 
 
 DR_R_SERVER_IP = '10.33.18.116'
-IP = '127.0.0.1'  # change to the IP address of the server
+IP = '10.33.18.116' # change to the IP address of the server
 PORT = 12000  # change to a desired port number
 BUFFER_SIZE = 1024  # change to a desired buffer size
 
@@ -48,20 +48,26 @@ def send_file(filename: str, address: (str, int)): # type: ignore
         
         # TODO: section 2 step 7
         response = client_socket.recv(BUFFER_SIZE).decode()
+        print(f"[+] Server responded with: {response}")
         if response != "go ahead":
             raise OSError("Bad server response - was not go ahead!")
         
+        chunk_number = 0
         # open the file to be transferred
         with open(file_name, 'rb') as file:
             # read the file in chunks and send each chunk to the server
             is_done = False
             while not is_done:
-                pass
-                # TODO: section 2 step 8a
+                # section 2 step 8a
                 chunk = file.read(BUFFER_SIZE)
-                # TODO: section 2 step 8b
-                if len(chunk) > 0:
+                # section 2 step 8b
+                if len(chunk) > 0: # Send condition
                     client_socket.send(chunk)
+                else: # Loop breaking condition
+                    is_done = True
+                print(f"[+] Chunk #{chunk_number} was sent")
+                chunk_number += 1
+        print(f"[+] File was sent successfully")
             
     except OSError as e:
         ret_value = 2
