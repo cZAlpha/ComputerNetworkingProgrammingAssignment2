@@ -2,11 +2,15 @@ import socket
 import os.path as path
 import sys
 
+
+DR_R_SERVER_IP = '10.33.18.116'
 IP = '127.0.0.1'  # change to the IP address of the server
 PORT = 12000  # change to a desired port number
 BUFFER_SIZE = 1024  # change to a desired buffer size
 
-CONSOLE = "/usr/local/bin/python3.12 /Users/nbklaus21/Documents/VSCodeProjects/devDSU2025/ComputerNetworking/ProgrammingAssignments/ProgrammingAssignment2/ComputerNetworkingProgrammingAssignment2/client.py hello.txt 127.0.0.1 12000"
+LOCAL_CONSOLE = "/usr/local/bin/python3.12 /Users/nbklaus21/Documents/VSCodeProjects/devDSU2025/ComputerNetworking/ProgrammingAssignments/ProgrammingAssignment2/ComputerNetworkingProgrammingAssignment2/client.py hello.txt 127.0.0.1 12000"
+DR_R_CONSOLE = "/usr/local/bin/python3.12 /Users/nbklaus21/Documents/VSCodeProjects/devDSU2025/ComputerNetworking/ProgrammingAssignments/ProgrammingAssignment2/ComputerNetworkingProgrammingAssignment2/client.py hello.txt 10.33.18.116 12000"
+
 
 def get_file_size(file_name: str) -> int:
     size = 0
@@ -75,17 +79,13 @@ if __name__ == "__main__":
     # if an IP address is provided on cmdline, then use it
     if len(sys.argv) == 3:
         IP = sys.argv[2]
-
+    
     try:
         # if port is provided on cmdline, then use it
         if len(sys.argv) == 4:
             PORT = int(sys.argv[3])
     except ValueError as ve:
         print(ve)
-
+    
     ret_value = send_file(file_name, (IP, PORT))
     sys.exit(ret_value)
-
-
-
-
