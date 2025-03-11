@@ -22,7 +22,7 @@ def get_file_size(file_name: str) -> int:
     return size
 
 
-def send_file(filename: str, address: (str | int)):
+def send_file(filename: str, address: (str, int)): # type: ignore
     ret_value = 0
     # get the file size in bytes
     # TODO: section 2 step 2
@@ -37,7 +37,7 @@ def send_file(filename: str, address: (str | int)):
     
     try:
         # TODO: section 2 step 5
-        client_socket.connect((IP, PORT))
+        client_socket.connect(address)
         
         # send the file size in the first 8-bytes followed by the bytes
         # for the file name to server at (IP, PORT)
